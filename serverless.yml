@@ -1,0 +1,26 @@
+# Welcome to Serverless!
+# Challenge #8
+# Build a Slack command /action to show a random 80's action flick
+
+service: actionflick 
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: us-east-1
+
+functions:
+  authorization:
+    handler: handler.authorization
+    events:
+      - http:
+          method: get
+          path: slack/authorization
+  action:
+    handler: handler.action
+    events:
+      - http:
+          method: post
+          path: slack/action
+
